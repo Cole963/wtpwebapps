@@ -74,5 +74,7 @@
 	<h1>TESTING agane</h1>
 	<br>
 	<h1>testing the restart AGAIN</h1>
+	<br>
+	<h1>TESTING PULL WITHOUT RESTART</h1>
 </body>
 </html>
