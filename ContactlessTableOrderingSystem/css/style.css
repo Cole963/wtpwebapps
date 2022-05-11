@@ -1,0 +1,46 @@
+img
+{
+    max-width: 100%;
+    height: auto;
+    background: lightblue;
+    background: radial-gradient(white 30%, lightblue 70%);
+}
+
+.table tbody td,.table thead th
+{
+	vertical-align: middle;	
+	text-align: center;
+}
+
+.btn-incre, .btn-decre
+{
+	box-shadow: none;
+	font-size: 25px;
+}
+
+#formQuantity
+{
+	margin-left : auto;
+	margin-right : auto;
+	display : inline-block;
+}
+
+#formQuantity input
+{
+	text-align : center;
+}
+
+#checkoutButton
+{
+	color : #FFFFFF;
+}
+
+.centeredText
+{
+	font-size : 30px;
+	text-align : center;
+	padding: 70px 0;
+}
+
+
+

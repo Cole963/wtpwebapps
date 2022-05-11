@@ -52,11 +52,11 @@
 	<br>
 	<div class="row">
 		<div class="container">
-			<h3 class="text-center">List of User Accounts</h3>
+			<h3 class="text-center">List of User Profiles</h3>
 			<hr>
 			<div class="container text-left">
 
-				<a href="<%=request.getContextPath()%>/newUserAccountForm" class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float: right;"> + </a>
+				<a href="<%=request.getContextPath()%>/newUserProfileForm" class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float: right;"> + </a>
 				<br></br>
 			</div>
 			<br>
@@ -64,25 +64,21 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Name</th>
-						<th>Username</th>
-						<th>Email</th>
-						<th>User Profile</th>
+						<th>Profile</th>
+						<th>Description</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="user" items="${userAccountList}">
+					<c:forEach var="userProfile" items="${userProfileList}">
 
 						<tr>
-							<td><c:out value="${user.id}" /></td>
-							<td><c:out value="${user.name}" /></td>
-							<td><c:out value="${user.username}" /></td>
-							<td><c:out value="${user.email}" /></td>
-							<td><c:out value="${user.userprofile}" /></td>
-							<td><a href="editUserAccountForm?id=<c:out value='${user.id}' />">Edit</a>
+							<td><c:out value="${userProfile.id}" /></td>
+							<td><c:out value="${userProfile.profile}" /></td>
+							<td><c:out value="${userProfile.description}" /></td>
+							<td><a href="editUserProfileForm?id=<c:out value='${userProfile.id}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; 
-								<a href="deleteUserAccount?id=<c:out value='${user.id}' /> " onclick= "return confirmDelete();">Delete</a></td>
+								<a href="deleteUserProfile?id=<c:out value='${userProfile.id}' /> " onclick= "return confirmDelete();">Delete</a></td>
 								
 						</tr>
 					</c:forEach>
@@ -94,7 +90,7 @@
 	<script>
 	function confirmDelete() 
 	{
-	    return confirm("Are you sure you want to delete this user account?");
+	    return confirm("Are you sure you want to delete this user profile?");
 	}
 	
 	function logout() 
