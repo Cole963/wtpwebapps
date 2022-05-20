@@ -11,6 +11,53 @@
 
 <%@include file= "include/header.jsp" %>
 
+<script>
+/* 	function validate()
+	{
+		var mobileNum = document.getElementById("mobileNum").value;
+		
+		if (mobileNum == "" || mobileNum == null)
+			{
+				alert("mobile number can't be empty");
+				return false;
+			}
+		
+		if (!mobileNum.match(/^[0-9]+$/))
+			{
+				alert("mobile number need to be number only");
+				return false;
+			}
+		
+		
+		return true;
+	}
+	 */
+	 
+	 function promptMobileNum()
+	 {
+		 var mobileNum = prompt ("Please enter your mobile Number:")
+		 
+		 if (mobileNum == "" || mobileNum == null)
+		{
+				alert("mobile number can't be empty");
+				return false;
+		}
+		
+		else if (!mobileNum.match(/^[0-9]+$/))
+		{
+				alert("mobile number need to be number only");
+				return false;
+		}
+		 
+		else
+		{
+				document.getElementById("mobileNum").value = mobileNum;
+				return true;
+		}
+		 
+	 }
+	 
+</script>
 </head>
 <body>
 
@@ -18,7 +65,10 @@
 <div class ="container">
 	<div class = "d-flex py-3">
 		<h3 class = "ml-auto">Total Price: $ ${ (total>0) ? dcf.format(total) : 0} </h3>
-		<a class="ml-auto btn btn-success" id ="checkoutButton" href ="cart-check-out"> Check Out </a>
+		<form class="ml-auto" action = "cart-check-out" method = "post" class ="form-inline">
+			<input type="text" name="mobileNum" id="mobileNum" placeholder = "Input your mobile number" hidden = "hidden">
+			<button type = "submit" class="btn btn-success" id = "checkoutButton" onclick = "return promptMobileNum()">Check out</button>
+		</form>
 	</div>
 	<table class= "table table-loght">
 		<thead>
@@ -36,7 +86,7 @@
 				for(cart c :cartList)
 				{%>
 					<tr>
-					<td><%= c.getMenuName() %></td>
+					<td><%= c.getName() %></td>
 					<td><%= dcf.format(c.getPrice()) %>$</td>
 					<td>
 							<form action="" method ="post" class="form-inline" id="formQuantity">

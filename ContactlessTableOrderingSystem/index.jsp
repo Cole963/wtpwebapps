@@ -1,94 +1,81 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Contactless Table Ordering System</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!DOCTYPE html>
+        <html>
 
+        <head>
+            <title>Contactless Table Ordering System</title>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+            <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" />
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <link rel="stylesheet" href="CSS/style.css">
+            <script src="JS/script.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        </head>
+        <body>
+            <header>
+                <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+                    <div>
+                        <a href="" class="navbar-brand"> Scream Scrum Restaurant </a>
+                    </div>
 
-<script>
-	function validate() {
-		
-			
-			var username = document.getElementById("username").value;
-	
-			if(username.length > 45){
-				alert("Please enter a username that is less than 45 characters");
-				return false;
-			}
-			
-			var password = document.getElementById("password").value;
-			
-			
-			if(password.length > 45){
-				alert("Please enter a password that is less than 45 characters");
-				return false;
-			}
-			
-			var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-			if (format.test(password)){
-				alert("Please enter a password with no special characters");
-				return false;
-			}
-			
-		 return true;
-	}
-	
-</script>
+                    <ul class="navbar-nav">
+                        <li>
+                        	<a href="<%=request.getContextPath()%>/index.jsp" class="nav-link">Home</a>
+                        </li>
+	                   	<c:if test="${sessionScope.profile == 'User Admin'}">
+	                        <li>
+	                        	<a href="<%=request.getContextPath()%>/viewUserAccount" class="nav-link">User Accounts</a>
+	                        </li>
+	                        <li>
+	                        	<a href="<%=request.getContextPath()%>/viewUserProfile" class="nav-link">User Profiles</a>
+	                        </li>
+	            		</c:if>
+	            		<c:if test="${sessionScope.profile == 'Restaurant Manager'}">
+	                        <li>
+	                        	<a href="<%=request.getContextPath()%>/viewMenuItem" class="nav-link">Menu Items</a>
+	                        </li>
+	            		</c:if>
+                    </ul>
+                    
+                    <c:if test="${sessionScope.username != null}">
+                    <ul class="navbar-nav ml-auto">
+                    	<li>
+                    		<a href="" class="nav-link disabled">${profile}</a>
+                    	</li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               ${username}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" id="logout_btn" href="<%=request.getContextPath()%>/logout" onclick="return logout();" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          							Logout
+          						</a>
+                            </div>
+                        </li>
+                    </ul>
+                    </c:if>
+                    <c:if test="${sessionScope.username == null}">
+                    <ul class="navbar-nav ml-auto">
+                    	<li>
+                    		<a class="nav-link" href="<%=request.getContextPath()%>/LoginForm.jsp">Staff Login</a>
+                    	</li>
+                    </ul>
+                    </c:if>
+                </nav>
+            </header>
+            <br>
+            <div class="row">
+                <div class="container">
+                    <h3 class="text-center">Home Page for all users</h3>
+                    <hr>
+                </div>
+            </div>
+        </body>
 
-</head>
-<body>
-	<header>
-		<nav class="navbar navbar-expand-md navbar-dark" style="background-color: green">
-			<div>
-				<a href="<%=request.getContextPath()%>/index" class="navbar-brand"> Scream Scrum Restaurant </a>
-			</div>
-
-			
-		</nav>
-	</header>
-	<br>
-	<div class="container col-md-3"  style="float: right">
-		<div class="card">
-			<div class="card-body" >
-				<form action="login" method="post">
-
-				<caption>
-					<h2>
-            			Login
-					</h2>
-				</caption>
-
-				<table style="width: 100%">
-					<tr>
-						<td>Username</td>
-						<td><input type="text" name="username" /></td>
-					</tr>
-					<tr>
-						<td>Password</td>
-						<td><input type="password" name="password"/></td>
-						<span style="color: red"> ${message} </span>
-					</tr>
-				</table>
-
-				<br></br>
-            	<button type="submit" class="btn btn-outline-success my-2 my-sm-0" onclick= "return validate();" type="submit" style="float: right;">Login</button>
-				
-				</form>
-
-			</div>
-		</div>
-	</div>
-	
-</body>
-</html>
+        </html>

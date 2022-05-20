@@ -5,6 +5,7 @@
 <%@ page import = "com.screamscrum.cart.entity.cart" %>
 <%@ page import = "java.util.List" %>
 <%@ page import = "java.util.ArrayList" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <%
 	DecimalFormat dcf = new DecimalFormat("#.##");
