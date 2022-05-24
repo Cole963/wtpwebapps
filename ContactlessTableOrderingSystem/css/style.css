@@ -14,19 +14,19 @@
 	border-color: #e74c3c;
 }
 
-.form-group i {
+.form-group .symbol {
 	visibility: hidden;
 	position: absolute;
 	top: 40px;
 	right: 10px;
 }
 
-.form-group.pass i.fa-check-circle {
+.form-group.pass .valid {
 	color: #2ecc71;
 	visibility: visible;
 }
 
-.form-group.fail i.fa-exclamation-circle {
+.form-group.fail .invalid {
 	color: #e74c3c;
 	visibility: visible;
 }
@@ -43,56 +43,53 @@
 	visibility: visible;
 }
 
-/*Ekki's*/
-/*----------------------------------------------------------------------*/
-img
-{
-    max-width: 100%;
-    height: auto;
-    background: lightblue;
-    background: radial-gradient(white 30%, lightblue 70%);
+.toggleHide {
+	visibility: hidden;
 }
 
-.table tbody td,.table thead th
-{
-	vertical-align: middle;	
+/*Ekki's*/
+/*----------------------------------------------------------------------*/
+img {
+	max-width: 100%;
+	height: auto;
+	background: lightblue;
+	background: radial-gradient(white 30%, lightblue 70%);
+}
+
+.table tbody td,
+.table thead th {
+	vertical-align: middle;
 	text-align: center;
 }
 
-.btn-incre, .btn-decre
-{
+.btn-change {
 	box-shadow: none;
 	font-size: 25px;
 }
 
-#formQuantity
-{
-	margin-left : auto;
-	margin-right : auto;
-	display : inline-block;
+.formQuantity {
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-block;
 }
 
-#formQuantity input
-{
-	text-align : center;
+.formQuantity input {
+	text-align: center;
 }
 
-#checkoutButton
-{
-	color : #FFFFFF;
+#checkoutButton {
+	color: #FFFFFF;
 }
 
-.centeredText
-{
-	font-size : 30px;
-	text-align : center;
+.centeredText {
+	font-size: 30px;
+	text-align: center;
 	padding: 70px 0;
 }
 
-.searchMenu
-{
-	width : 600px;
-	height : 39px;
-	text-align : center;
-	margin-top : 30px;
+.searchMenu {
+	width: 600px;
+	height: 39px;
+	text-align: center;
+	margin-top: 30px;
 }

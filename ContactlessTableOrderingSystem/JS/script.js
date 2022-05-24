@@ -147,6 +147,17 @@ function emailFormatValid(email) {
     return valid;
 }
 
+function resetAccountFormDefault() {
+    var fullname = document.getElementById("fullname");
+    var username = document.getElementById("username");
+    var password = document.getElementById("password");
+    var email = document.getElementById("email");
+    fullname.parentElement.className = 'form-group';
+    username.parentElement.className = 'form-group';
+    password.parentElement.className = 'form-group';
+    email.parentElement.className = 'form-group';
+}
+
 /*UserProfileForm.jsp*/
 /*----------------------------------------------------------------------*/
 function userProfileFormValidation() {
@@ -198,6 +209,13 @@ function descriptionLengthValid(description) {
     return valid;
 }
 
+function resetProfileFormDefault() {
+    var profile = document.getElementById("profile");
+    var description = document.getElementById("description");
+    profile.parentElement.className = 'form-group';
+    description.parentElement.className = 'form-group';
+}
+
 /*LoginForm.jsp*/
 /*----------------------------------------------------------------------*/
 function loginValidation() {
@@ -238,8 +256,101 @@ function loginValidation() {
 
 /*MenuItemForm.jsp*/
 /*----------------------------------------------------------------------*/
-function trimTemp(myString) { 
-	return myString.replace(/^\s+|\s+$/g,''); 
+function menuItemFormValidation() {
+    var name = document.getElementById("name");
+    nameVal = name.value.trim();
+    name.value = nameVal;
+
+    var price = document.getElementById("price");
+    var priceVal = price.value;
+    price.value = Number(priceVal).toFixed(2);
+}
+
+/*Cart.jsp*/
+/*----------------------------------------------------------------------*/
+function promptMobileNum() {
+    var mobileNum = document.getElementById("mobileNum");
+    mobileNum = prompt("Please enter your mobile number:");
+
+    if (mobileNum == null) {
+        return false;
+    } else if (!mobileNum.match(/^[0-9]{1,9}$/)) {
+        alert("Invalid mobile number");
+        return false;
+    } else {
+        document.getElementById("mobileNum").value = mobileNum;
+        return true;
+    }
+
+}
+
+/*OrderViwe.jsp & OrderItemView.jsp*/
+/*----------------------------------------------------------------------*/
+$(document).ready(function() {
+    $('.toggleEditOrderItem').on('click', function() {
+        var $this = $(this);
+        var $first = $this.closest('tr').find('.toggleHide').eq(0);
+        var $second = $this.closest('tr').find('.toggleHide').eq(1);
+        var $third = $this.closest('tr').find('.toggleHide').eq(2);
+        if ($first.css('visibility') == 'hidden') {
+            $first.css('visibility', 'visible');
+        } else {
+            $first.css('visibility', 'hidden');
+        }
+        if ($second.css('visibility') == 'hidden') {
+            $second.css('visibility', 'visible');
+        } else {
+            $second.css('visibility', 'hidden');
+        }
+        if ($third.css('visibility') == 'hidden') {
+            $third.css('visibility', 'visible');
+        } else {
+            $third.css('visibility', 'hidden');
+        }
+    });
+    $('.minus').on('click', function() {
+        var qty = $(this).closest('tr').find("input[name='quantity']");
+        var update = qty.val();
+        if (update > 1) {
+            update--;
+        }
+        qty.val(update);
+    });
+    $('.plus').on('click', function() {
+        var qty = $(this).closest('tr').find("input[name='quantity']");
+        var update = qty.val();
+        update++;
+        qty.val(update);
+    });
+
+    $('.toggleEditOrder').on('click', function() {
+        var $this = $(this);
+        var $first = $this.closest('tr').find('.toggleHide');
+        var $second = $this.closest('tr').find('.toggleMobile');
+        if ($first.css('visibility') == 'hidden') {
+            $first.css('visibility', 'visible');
+            $second.prop('readonly', false);
+        } else {
+            $first.css('visibility', 'hidden');
+            $second.prop('readonly', true);
+        }
+    });
+
+});
+
+function validateMobileNum() {
+    var mobileNum = document.getElementById("mobileNum").value;
+
+    if (mobileNum == null || mobileNum == "") {
+        alert("Mobile number cannot be empty");
+        return false;
+    } else if (!mobileNum.match(/^[0-9]{1,9}$/)) {
+        alert("Invalid mobile number");
+        return false;
+    } else {
+        document.getElementById("mobileNum").value = mobileNum;
+        return true;
+    }
 }
 
 /*Common functions for form controls manipulation*/
@@ -256,17 +367,6 @@ function setPass(input) {
     formCtrl.className = 'form-group pass';
 }
 
-function resetDefault() {
-    var fullname = document.getElementById("fullname");
-    var username = document.getElementById("username");
-    var password = document.getElementById("password");
-    var email = document.getElementById("email");
-    fullname.parentElement.className = 'form-group';
-    username.parentElement.className = 'form-group';
-    password.parentElement.className = 'form-group';
-    email.parentElement.className = 'form-group';
-}
-
 function trimSearchInput() {
     var input = document.getElementById("searchInput");
     inputVal = input.value.trim();
@@ -279,6 +379,6 @@ function logout() {
     return confirm("Are you sure you want to logout?");
 }
 
-function confirmUserAccountAction(message) {
+function confirmUserAction(message) {
     return confirm(message);
 }
